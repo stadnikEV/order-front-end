@@ -1,0 +1,20 @@
+@import 'components/__shared/css/variables.scss';
+
+html, body {
+  width: 100%;
+}
+
+body {
+  height: 100%;
+  font: 16px arial, sans-serif;
+  background-color: $white;
+  color: $black;
+}
+
+.hidden {
+  display: none;
+}
+
+.height100Percent {
+  height: 100%;
+}

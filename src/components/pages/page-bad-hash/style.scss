@@ -1,0 +1,69 @@
+@import 'components/__shared/css/variables.scss';
+
+.bad-hash {
+  overflow: auto;
+  height: 100%;
+  white-space: nowrap;
+  text-align: center;
+  background: $background-gradient;
+    &:before {
+      content: '';
+      height: 100%;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+  &__message-container {
+    width: 270px;
+    padding: 10px 0;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    white-space: normal;
+
+    .bad-hash__circle {
+      width: 270px;
+      height: 270px;
+      background-color: $red-intense;
+      border: solid 10px $white;
+      border-radius: 50%;
+      box-sizing: border-box;
+      box-shadow: 0 0 0 2px $gray;
+      position: relative;
+
+      .bad-hash__rectangular {
+        width: 230px;
+        height: 60px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-size: 105%;
+        font-weight: bold;
+        background-color: $white;
+        color: $red-intense;
+        text-align: center;
+        line-height: 60px;
+        border-radius: 5px;
+        margin: {
+          left: -115px;
+          top: -30px;
+        }
+      }
+    }
+  }
+
+
+  &__link {
+    display: block;
+    letter-spacing: 1px;
+    color: $light-gray;
+    font-size: 110%;
+    margin-top: 30px;
+    transition: color 0.1s ease-out;
+    text-align: center;
+    text-decoration: none;
+      &:hover {
+        color: white;
+      }
+  }
+}

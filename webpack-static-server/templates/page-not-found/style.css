@@ -1,0 +1,73 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font: 16px arial, sans-serif;
+}
+body {
+  overflow: auto;
+  height: 100%;
+  white-space: nowrap;
+  text-align: center;
+  background: linear-gradient(25deg, rgba(39, 171, 255, 0.6) 0%, rgba(39, 171, 255, 0.95) 25%, rgba(46, 180, 255, 1) 25.05%, rgba(46, 180, 255, 0.8) 75%, rgba(39, 171, 255, 0.65) 75.01%, rgba(39, 171, 255, 0.3));
+}
+
+
+body:before {
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  content: '';
+}
+
+.container {
+  width: 270px;
+  padding: 10px 0;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: left;
+  white-space: normal;
+}
+
+.circle {
+  width: 270px;
+  height: 270px;
+  background-color: rgb(255, 58, 38);
+  border: solid 10px rgb(243, 243, 243);
+  border-radius: 50%;
+  box-sizing: border-box;
+  box-shadow: 0 0 0 2px rgb(140, 140, 140);
+  position: relative;
+}
+
+.rectangular {
+  width: 230px;
+  height: 60px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font: bold 17px arial, sans-serif;
+  background-color: rgb(243, 243, 243);
+  color: rgb(255, 58, 38);
+  text-align: center;
+  line-height: 60px;
+  border-radius: 5px;
+  margin-left: -115px;
+  margin-top: -30px;
+}
+
+
+.link {
+  display: block;
+  letter-spacing: 1px;
+  color: rgb(243, 243, 243);
+  font-size: 20px;
+  margin-top: 30px;
+  transition: color 0.1s ease-out;
+  text-align: center;
+  text-decoration: none;
+}
+.link:hover {
+  color: white;
+}
