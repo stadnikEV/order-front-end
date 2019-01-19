@@ -1,19 +1,19 @@
 import PubSub from 'pubsub-js';
 import router from 'router';
 import BaseComponent from 'components/__shared/base-component';
-import ButtonCreate from 'components/buttons/button-create';
+import ButtonMain from 'components/buttons/button-main';
 import template from './template.hbs';
 import './style.scss';
 
-class OrderList extends BaseComponent {
+class PageOrderList extends BaseComponent {
   constructor({ el }) {
     super({ el });
     this.render();
     this.components = {};
     this.eventsPubSub = {};
 
-    this.elements.orderList = document.querySelector('[data-component="order-list"]');
-    this.elements.buttonCreateContainer = document.querySelector('[data-element="order-list__button-create-container"]');
+    this.elements.pageOrderList = document.querySelector('[data-component="page-order-list"]');
+    this.elements.buttonCreateContainer = this.elements.pageOrderList.querySelector('[data-element="page-order-list__button-create-container"]');
 
     this.initButtonCreate();
     this.addEvents();
@@ -32,7 +32,7 @@ class OrderList extends BaseComponent {
   }
 
   initButtonCreate() {
-    this.components.buttonCreate = new ButtonCreate({
+    this.components.buttonCreate = new ButtonMain({
       el: this.elements.buttonCreateContainer,
       value: 'Создать',
       componentName: 'button-create',
@@ -45,4 +45,4 @@ class OrderList extends BaseComponent {
   }
 }
 
-export default OrderList;
+export default PageOrderList;

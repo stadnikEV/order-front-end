@@ -1,0 +1,9 @@
+@import 'components/__shared/css/variables.scss';
+
+.button-submit {
+  font-size: 100%;
+  color: white;
+  background-color: $light-blue;
+  padding: 10px;
+  border-radius: 3px;
+}

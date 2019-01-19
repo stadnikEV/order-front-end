@@ -14,7 +14,6 @@ export default class BaseButton extends BaseComponent {
     data,
   }) {
     super({ el });
-    this.eventsPubSub = {};
 
     this.componentName = componentName;
     this.eventName = eventName;

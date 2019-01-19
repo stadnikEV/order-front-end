@@ -1,0 +1,30 @@
+@import 'components/__shared/css/variables.scss';
+
+.form-create-order {
+  padding-bottom: 100px;
+  &__input-name-container,
+  &__input-address-container,
+  &__input-phone-container,
+  &__select-status-container {
+    margin: {
+      top: 4px;
+      bottom: 12px;
+    }
+  }
+  &__button-cancel-container {
+    margin-top: 15px;
+    float: right;
+  }
+  &__submit-container,
+  &__button-cancel-container {
+    display: inline-block;
+    margin-top: 20px;
+    float: right;
+  }
+  &__button-cancel-container {
+    margin-right: 5px;
+  }
+  &__label {
+    color: $black;
+  }
+}

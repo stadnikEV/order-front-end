@@ -2,7 +2,7 @@ import BaseComponent from 'components/__shared/base-component';
 import template from './template.hbs';
 import './style.scss';
 
-class BadHash extends BaseComponent {
+class PageBadHash extends BaseComponent {
   constructor({ el }) {
     super({ el });
     this.render();
@@ -13,4 +13,4 @@ class BadHash extends BaseComponent {
   }
 }
 
-export default BadHash;
+export default PageBadHash;

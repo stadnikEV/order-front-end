@@ -1,0 +1,32 @@
+@import 'components/__shared/css/variables.scss';
+
+.page-order-create {
+  overflow: auto;
+  height: 100%;
+  white-space: nowrap;
+  text-align: center;
+
+  &:before {
+    content: '';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &__content-container {
+    width: 450px;
+    padding: 10px 0;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    white-space: normal;
+
+    .page-order-create__describe {
+      font-size: 125%;
+      color: $black;
+      margin-bottom: 20px;
+      cursor: default;
+      text-align: center;
+    }
+  }
+}

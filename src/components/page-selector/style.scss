@@ -1,8 +1,13 @@
-.page {
+.page-selector {
   height: 100%;
 
   &__content-container {
     width: 1200px;
     margin: 0 auto;
+    height: 100%;
+
+    .page-selector__page-order-create-container {
+      height: 100%;
+    }
   }
 }

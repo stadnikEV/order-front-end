@@ -14,10 +14,10 @@ export default class PageSelector extends BaseComponent {
     this.eventsPubSub = {};
 
     this.render();
-    this.elements.page = document.querySelector('[data-component="page"]');
-    this.elements.orderListContainer = this.elements.page.querySelector('[data-element="page__order-list-container"]');
-    this.elements.orderCreateContainer = this.elements.page.querySelector('[data-element="page__order-create-container"]');
-    this.elements.orderStatisticsContainer = this.elements.page.querySelector('[data-element="page__order-statistics-container"]');
+    this.elements.pageSelector = document.querySelector('[data-component="page-selector"]');
+    this.elements.pageOrderListContainer = this.elements.pageSelector.querySelector('[data-element="page-selector__page-order-list-container"]');
+    this.elements.pageOrderCreateContainer = this.elements.pageSelector.querySelector('[data-element="page-selector__page-order-create-container"]');
+    this.elements.pageOrderStatisticsContainer = this.elements.pageSelector.querySelector('[data-element="page-selector__page-order-statistics-container"]');
 
     this.addEvents();
   }
@@ -36,7 +36,7 @@ export default class PageSelector extends BaseComponent {
 
   onHashChange(msg, { routeHash }) {
     if (routeHash === 'badHash') {
-      this.initBadHash();
+      this.initPageBadHash();
       return;
     }
 
@@ -46,28 +46,49 @@ export default class PageSelector extends BaseComponent {
     }
 
     if (routeHash === 'order/list') {
-      this.initOrderList();
+      this.initPageOrderList();
+      return;
+    }
+
+    if (routeHash === 'order/create') {
+      this.initPageOrderCreate();
       // return;
     }
   }
 
-  initOrderList() {
-    import(/* webpackChunkName: "order-list" */ '../pages/page-order-list')
+  initPageOrderList() {
+    import(/* webpackChunkName: "page-order-list" */ '../pages/page-order-list')
       .then((Module) => {
         if (router.getRouteHash() !== 'order/list') {
           return;
         }
         const PageOrderList = Module.default;
-        this.components.orderList = new PageOrderList({ el: this.elements.orderListContainer });
-        this.currentMainComponentName = 'orderList';
+        this.components.pageOrderList = new PageOrderList({ el: this.elements.pageOrderListContainer });
+        this.currentMainComponentName = 'pageOrderList';
       })
       .catch((err) => {
         console.warn(err);
       });
   }
 
-  initBadHash() {
-    import(/* webpackChunkName: "bad-hash" */ '../pages/page-bad-hash')
+  initPageOrderCreate() {
+    import(/* webpackChunkName: "page-order-create" */ '../pages/page-order-create')
+      .then((Module) => {
+        if (router.getRouteHash() !== 'order/create') {
+          return;
+        }
+        const PageOrderCreate = Module.default;
+        document.documentElement.classList.add('height100Percent');
+        this.components.pageOrderCreate = new PageOrderCreate({ el: this.elements.pageOrderCreateContainer });
+        this.currentMainComponentName = 'pageOrderCreate';
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  }
+
+  initPageBadHash() {
+    import(/* webpackChunkName: "page-bad-hash" */ '../pages/page-bad-hash')
       .then((Module) => {
         if (router.getRouteHash() !== 'badHash') {
           return;
@@ -75,8 +96,8 @@ export default class PageSelector extends BaseComponent {
         const PageBadHash = Module.default;
         this.removeAllComponents();
         document.documentElement.classList.add('height100Percent');
-        this.components.badHash = new PageBadHash({ el: this.elements.page });
-        this.currentMainComponentName = 'badHash';
+        this.components.pageBadHash = new PageBadHash({ el: this.elements.pageSelector });
+        this.currentMainComponentName = 'pageBadHash';
       })
       .catch((err) => {
         console.warn(err);

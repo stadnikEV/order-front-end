@@ -1,0 +1,33 @@
+@import 'components/__shared/css/variables.scss';
+
+.input {
+  font-size: 100%;
+  line-height: 140%;
+  height: 42px;
+  padding-left: 5px;
+  border: {
+    top: solid 1px rgb(155, 155, 155);
+    left: solid 1px rgb(155, 155, 155);
+    right: solid 1px rgb(220, 220, 220);
+    bottom: solid 1px rgb(220, 220, 220);
+  }
+  border-radius: 2px;
+  box-sizing: border-box;
+  background-color: $white;
+
+  &:focus {
+    outline: none;
+    border: solid 2px $light-blue;
+    &.input_invalid {
+      border: solid 1px $red-intense;
+    }
+  }
+
+  &_invalid {
+    border: solid 1px $red-intense;
+  }
+}
+
+.select {
+  cursor: pointer;
+}

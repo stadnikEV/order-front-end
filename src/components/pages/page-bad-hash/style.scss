@@ -1,6 +1,6 @@
 @import 'components/__shared/css/variables.scss';
 
-.bad-hash {
+.page-bad-hash {
   overflow: auto;
   height: 100%;
   white-space: nowrap;
@@ -21,7 +21,7 @@
     text-align: left;
     white-space: normal;
 
-    .bad-hash__circle {
+    .page-bad-hash__circle {
       width: 270px;
       height: 270px;
       background-color: $red-intense;
@@ -31,7 +31,7 @@
       box-shadow: 0 0 0 2px $gray;
       position: relative;
 
-      .bad-hash__rectangular {
+      .page-bad-hash__rectangular {
         width: 230px;
         height: 60px;
         position: absolute;
