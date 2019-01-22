@@ -1,10 +1,10 @@
 import router from 'router';
 import PubSub from 'pubsub-js';
 import BaseComponent from 'components/__shared/base-component';
-import 'components/__shared/css/reset.scss'; // css
-import 'components/__shared/css/base.scss'; // css
+import 'components/__shared/css/reset.scss';
+import 'components/__shared/css/base.scss';
 import './style.scss';
-import template from './template.hbs'; // template
+import template from './template.hbs';
 
 
 export default class PageSelector extends BaseComponent {
@@ -15,9 +15,6 @@ export default class PageSelector extends BaseComponent {
 
     this.render();
     this.elements.pageSelector = document.querySelector('[data-component="page-selector"]');
-    this.elements.pageOrderListContainer = this.elements.pageSelector.querySelector('[data-element="page-selector__page-order-list-container"]');
-    this.elements.pageOrderCreateContainer = this.elements.pageSelector.querySelector('[data-element="page-selector__page-order-create-container"]');
-    this.elements.pageOrderStatisticsContainer = this.elements.pageSelector.querySelector('[data-element="page-selector__page-order-statistics-container"]');
 
     this.addEvents();
   }
@@ -35,11 +32,6 @@ export default class PageSelector extends BaseComponent {
   }
 
   onHashChange(msg, { routeHash }) {
-    if (routeHash === 'badHash') {
-      this.initPageBadHash();
-      return;
-    }
-
     if (this.currentMainComponentName !== undefined) {
       this.removeComponent({ componentName: this.currentMainComponentName });
       document.documentElement.classList.remove('height100Percent');
@@ -49,10 +41,20 @@ export default class PageSelector extends BaseComponent {
       this.initPageOrderList();
       return;
     }
-
     if (routeHash === 'order/create') {
       this.initPageOrderCreate();
-      // return;
+      return;
+    }
+    if (routeHash.search(/^order\/edit\/[0-9]+$/) !== -1) {
+      this.initPageOrderEdit();
+      return;
+    }
+    if (routeHash === 'badHash') {
+      this.initPageBadHash();
+      return;
+    }
+    if (routeHash === 'order/statistics') {
+      this.initPageStatistics();
     }
   }
 
@@ -63,7 +65,7 @@ export default class PageSelector extends BaseComponent {
           return;
         }
         const PageOrderList = Module.default;
-        this.components.pageOrderList = new PageOrderList({ el: this.elements.pageOrderListContainer });
+        this.components.pageOrderList = new PageOrderList({ el: this.elements.pageSelector });
         this.currentMainComponentName = 'pageOrderList';
       })
       .catch((err) => {
@@ -78,9 +80,41 @@ export default class PageSelector extends BaseComponent {
           return;
         }
         const PageOrderCreate = Module.default;
-        document.documentElement.classList.add('height100Percent');
-        this.components.pageOrderCreate = new PageOrderCreate({ el: this.elements.pageOrderCreateContainer });
+        this.components.pageOrderCreate = new PageOrderCreate({ el: this.elements.pageSelector });
         this.currentMainComponentName = 'pageOrderCreate';
+        document.documentElement.classList.add('height100Percent');
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  }
+
+  initPageOrderEdit() {
+    import(/* webpackChunkName: "page-order-edit" */ '../pages/page-order-edit')
+      .then((Module) => {
+        if (router.getRouteHash()
+          .search(/^order\/edit\/[0-9]+$/) === -1) {
+          return;
+        }
+        const PageOrderEdit = Module.default;
+        this.components.pageOrderEdit = new PageOrderEdit({ el: this.elements.pageSelector });
+        this.currentMainComponentName = 'pageOrderEdit';
+        document.documentElement.classList.add('height100Percent');
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  }
+
+  initPageStatistics() {
+    import(/* webpackChunkName: "page-order-statistics" */ '../pages/page-order-statistics')
+      .then((Module) => {
+        if (router.getRouteHash() !== 'order/statistics') {
+          return;
+        }
+        const PageOrderStatistics = Module.default;
+        this.components.pageOrderStatistics = new PageOrderStatistics({ el: this.elements.pageSelector });
+        this.currentMainComponentName = 'pageOrderStatistics';
       })
       .catch((err) => {
         console.warn(err);
@@ -94,10 +128,9 @@ export default class PageSelector extends BaseComponent {
           return;
         }
         const PageBadHash = Module.default;
-        this.removeAllComponents();
-        document.documentElement.classList.add('height100Percent');
         this.components.pageBadHash = new PageBadHash({ el: this.elements.pageSelector });
         this.currentMainComponentName = 'pageBadHash';
+        document.documentElement.classList.add('height100Percent');
       })
       .catch((err) => {
         console.warn(err);

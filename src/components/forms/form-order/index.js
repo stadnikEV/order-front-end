@@ -11,24 +11,26 @@ import './style.scss';
 import template from './template.hbs';
 
 
-export default class FormCreateOrder extends BaseComponent {
-  constructor({ el }) {
+export default class FormOrder extends BaseComponent {
+  constructor({ el, values = { status: 'confirmed' } }) {
     super({ el });
     this.components = {};
+    this.values = values;
 
     this.render();
-    this.elements.form = document.querySelector('[data-component="form-create-order"]');
-    this.elements.inputNameContainer = this.elements.form.querySelector('[data-element="form-create-order__input-name-container"]');
-    this.elements.inputAddressContainer = this.elements.form.querySelector('[data-element="form-create-order__input-address-container"]');
-    this.elements.inputPhoneContainer = this.elements.form.querySelector('[data-element="form-create-order__input-phone-container"]');
-    this.elements.selectStatusContainer = this.elements.form.querySelector('[data-element="form-create-order__select-status-container"]');
-    this.elements.buttonCancelContainer = this.elements.form.querySelector('[data-element="form-create-order__button-cancel-container"]');
-    this.elements.submitContainer = this.elements.form.querySelector('[data-element="form-create-order__submit-container"]');
-    this.elements.tipNameContainer = this.elements.form.querySelector('[data-element="form-create-order__tip-name-container"]');
-    this.elements.tipAddressContainer = this.elements.form.querySelector('[data-element="form-create-order__tip-address-container"]');
-    this.elements.tipPhoneContainer = this.elements.form.querySelector('[data-element="form-create-order__tip-phone-container"]');
+    this.elements.form = document.querySelector('[data-component="form-order"]');
+    this.elements.inputNameContainer = this.elements.form.querySelector('[data-element="form-order__input-name-container"]');
+    this.elements.inputAddressContainer = this.elements.form.querySelector('[data-element="form-order__input-address-container"]');
+    this.elements.inputPhoneContainer = this.elements.form.querySelector('[data-element="form-order__input-phone-container"]');
+    this.elements.selectStatusContainer = this.elements.form.querySelector('[data-element="form-order__select-status-container"]');
+    this.elements.buttonCancelContainer = this.elements.form.querySelector('[data-element="form-order__button-cancel-container"]');
+    this.elements.submitContainer = this.elements.form.querySelector('[data-element="form-order__submit-container"]');
+    this.elements.tipNameContainer = this.elements.form.querySelector('[data-element="form-order__tip-name-container"]');
+    this.elements.tipAddressContainer = this.elements.form.querySelector('[data-element="form-order__tip-address-container"]');
+    this.elements.tipPhoneContainer = this.elements.form.querySelector('[data-element="form-order__tip-phone-container"]');
 
     this.initInputs();
+    this.initSelectStatus({ selected: values.status });
     this.initSubmit();
     this.initButtonCancel();
     this.initTips();
@@ -51,7 +53,7 @@ export default class FormCreateOrder extends BaseComponent {
   }
 
   onClick(e) {
-    const submit = e.target.closest('[data-component="submit-create-order"]');
+    const submit = e.target.closest('[data-component="submit-order"]');
 
     if (submit) {
       if (!this.elements.form.contains(submit)) {
@@ -79,7 +81,7 @@ export default class FormCreateOrder extends BaseComponent {
       if (isValid.name
       && isValid.address
       && isValid.phone) {
-        PubSub.publish('create-order-data', {
+        PubSub.publish('order-data', {
           name: nameValue,
           address: addressValue,
           phone: phoneValue,
@@ -157,33 +159,46 @@ export default class FormCreateOrder extends BaseComponent {
     this.components.inputName = new InputText({
       el: this.elements.inputNameContainer,
       componentName: 'input-name',
+      value: this.values.name,
     });
     this.components.inputAddress = new InputText({
       el: this.elements.inputAddressContainer,
       componentName: 'input-address',
+      value: this.values.address,
     });
     this.components.inputPhone = new InputText({
       el: this.elements.inputPhoneContainer,
       componentName: 'input-phone',
+      value: this.values.phone,
     });
+  }
+
+  initSelectStatus({ selected }) {
+    const options = [
+      {
+        value: 'confirmed',
+        content: 'Подтвержден',
+      },
+      {
+        value: 'canceled',
+        content: 'Отменен',
+      },
+      {
+        value: 'deferred',
+        content: 'Отложен',
+      },
+    ];
+
+    options.forEach((option) => {
+      if (option.value === selected) {
+        option.selected = 'selected';
+      }
+    });
+
     this.components.selectStatus = new Select({
       el: this.elements.selectStatusContainer,
       componentName: 'select-status',
-      options: [
-        {
-          value: 'confirmed',
-          selected: 'selected',
-          content: 'Подтвержден',
-        },
-        {
-          value: 'canceled',
-          content: 'Отменен',
-        },
-        {
-          value: 'deferred',
-          content: 'Отложен',
-        },
-      ],
+      options,
     });
   }
 
@@ -199,7 +214,7 @@ export default class FormCreateOrder extends BaseComponent {
   initSubmit() {
     this.components.buttonSubmit = new ButtonSubmit({
       el: this.elements.submitContainer,
-      componentName: 'submit-create-order',
+      componentName: 'submit-order',
       value: 'Сохранить',
     });
   }

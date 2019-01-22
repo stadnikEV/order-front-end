@@ -1,0 +1,12 @@
+@import 'components/__shared/css/variables.scss';
+
+.button-list {
+  color: $blue;
+  background-color: $white;
+  padding: 9px 0;
+  font-size: 105%;
+
+  &:hover {
+    color: $light-blue;
+  }
+}

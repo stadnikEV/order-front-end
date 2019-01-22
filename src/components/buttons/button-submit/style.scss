@@ -6,4 +6,8 @@
   background-color: $light-blue;
   padding: 10px;
   border-radius: 3px;
+
+  &:hover {
+    background-color: $very-light-blue;
+  }
 }

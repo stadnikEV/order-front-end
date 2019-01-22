@@ -1,10 +1,10 @@
 @import 'components/__shared/css/variables.scss';
 
-.page-order-create {
-  width: 1200px;
+.page-order-edit {
   height: 100%;
-  margin: 0 auto;
+  width: 1200px;
   overflow: auto;
+  margin: 0 auto;
   white-space: nowrap;
   text-align: center;
 
@@ -23,7 +23,7 @@
     text-align: left;
     white-space: normal;
 
-    .page-order-create__describe {
+    .page-order-edit__describe {
       font-size: 125%;
       color: $black;
       margin-bottom: 20px;

@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "description": "front-end",
   "scripts": {
-    "prod": "NODE_ENV=prod webpack",
     "dev": "NODE_ENV=dev webpack-dev-server"
   },
   "author": "Eugene Stadnik",

@@ -17,6 +17,12 @@ module.exports = {
         enforce: 'pre',
         test: /\.js$/,
         exclude: /node_modules/,
+        loader: 'set-api-path',
+      },
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: /node_modules/,
         loader: 'eslint-loader',
       },
       {
@@ -70,5 +76,8 @@ module.exports = {
     setup: (app) => {
       staticMiddleware(app); // get static files
     },
+  },
+  resolveLoader: {
+    modules: ['node_modules', 'webpack-loaders'],
   },
 };

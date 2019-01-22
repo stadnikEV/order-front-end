@@ -1,0 +1,25 @@
+<table class="order-list"
+       data-component="order-list">
+  <tr>
+    <tr>
+      <th class="order-list__th1">ID</th>
+      <th class="order-list__th2">Имя</th>
+      <th class="order-list__th3">Адрес</th>
+      <th class="order-list__th4">Телефон</th>
+      <th class="order-list__th5"></th>
+    </tr>
+  </tr>
+  {{#each date}}
+    <tr>
+      <td class="order-list__first-col">{{id}}</td>
+      <td>{{name}}</td>
+      <td>{{address}}</td>
+      <td>{{phone}}</td>
+      <td class="order-list__last-col">
+        <div class="order-list__button-edit-container"
+             data-element="order-list__button-edit-container-{{id}}">
+        </div>
+      </td>
+    </tr>
+  {{/each}}
+</table>

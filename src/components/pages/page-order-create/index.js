@@ -2,7 +2,7 @@ import PubSub from 'pubsub-js';
 import router from 'router';
 import httpRequest from 'utils/http-request.js';
 import BaseComponent from 'components/__shared/base-component';
-import FormCreateOrder from 'components/forms/form-create-order';
+import FormOrder from 'components/forms/form-order';
 import template from './template.hbs';
 import './style.scss';
 
@@ -14,9 +14,9 @@ class PageOrderCreate extends BaseComponent {
     this.eventsPubSub = {};
 
     this.elements.pageOrderCreate = document.querySelector('[data-component="page-order-create"]');
-    this.elements.formCreateOrderContainer = this.elements.pageOrderCreate.querySelector('[data-element="page-order-create__form-create-order"]');
+    this.elements.formOrderContainer = this.elements.pageOrderCreate.querySelector('[data-element="page-order-create__form-order"]');
 
-    this.initFormCreateOrder();
+    this.initFormOrder();
     this.addEvents();
   }
 
@@ -25,36 +25,36 @@ class PageOrderCreate extends BaseComponent {
   }
 
   addEvents() {
-    this.eventsPubSub.createOrderData = PubSub.subscribe('create-order-data', this.onSendData.bind(this));
-    this.eventsPubSub.cancel = PubSub.subscribe('button-cancel', this.onCancel.bind(this));
+    this.eventsPubSub.orderData = PubSub.subscribe('order-data', this.onSendData.bind(this));
+    this.eventsPubSub.clickCancel = PubSub.subscribe('button-cancel', this.onClickCancel.bind(this));
   }
 
   removeEvents() {
     this.unsubscribe();
   }
 
-  initFormCreateOrder() {
-    this.components.formCreateOrder = new FormCreateOrder({
-      el: this.elements.formCreateOrderContainer,
+  initFormOrder() {
+    this.components.formOrder = new FormOrder({
+      el: this.elements.formOrderContainer,
     });
   }
 
   onSendData(msg, data) {
-    this.components.formCreateOrder.formDisable();
+    this.components.formOrder.formDisable();
     httpRequest.put({
-      url: 'http://localhost:8080/orders',
+      url: '<%publicPathApi%>/orders',
       options: { data },
     })
       .then(() => {
         router.setRouteHash({ routeHash: 'order/list' });
       })
       .catch((err) => {
-        this.components.formCreateOrder.formEnable();
+        this.components.formOrder.formEnable();
         console.warn(err);
       });
   }
 
-  onCancel() {
+  onClickCancel() {
     router.setRouteHash({ routeHash: 'order/list' });
   }
 }

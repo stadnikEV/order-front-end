@@ -9,30 +9,23 @@ const httpRequest = () => {
     get({ url, options = {} }) {
       options.method = 'get';
       const params = this.prepareParams(options);
-
       return this.request(url, params);
     }
-
 
     post({ url, options = {} }) {
       options.method = 'post';
       const params = this.prepareParams(options);
-
       return this.request(url, params);
     }
-
 
     put({ url, options = {} }) {
       options.method = 'put';
       const params = this.prepareParams(options);
-
       return this.request(url, params);
     }
 
-
     delete({ url, options = {} }) {
       options.method = 'delete';
-
       return this.request(url, options);
     }
 
@@ -45,7 +38,7 @@ const httpRequest = () => {
         },
       };
 
-      if (contentType === 'application/json' && data) {
+      if (data) {
         params.body = JSON.stringify(data);
       }
 
@@ -68,7 +61,7 @@ const httpRequest = () => {
             }
             return Promise.reject(new HttpError({
               status: 404,
-              message: 'Page not found',
+              message: 'Not found',
             }));
           })
           .then((responeData) => {

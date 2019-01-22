@@ -1,6 +1,6 @@
 import BaseInput from 'components/__shared/base-input';
 import './style.scss';
-import template from './template.hbs'; // template
+import template from './template.hbs';
 
 
 export default class Select extends BaseInput {

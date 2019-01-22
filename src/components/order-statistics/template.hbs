@@ -1,0 +1,19 @@
+<table class="order-statistics"
+       data-component="order-statistics">
+  <tr>
+    <tr>
+      <th class="order-statistics__th1">Дата</th>
+      <th class="order-statistics__th2">Подтверждено</th>
+      <th class="order-statistics__th3">Отменено</th>
+      <th class="order-statistics__th4">Отложено</th>
+    </tr>
+  </tr>
+  {{#each date}}
+    <tr>
+      <td>{{date}}</td>
+      <td>{{confirmed}} ({{confirmedProcent}}%)</td>
+      <td>{{canceled}} ({{canceledProcent}}%)</td>
+      <td>{{deferred}} ({{deferredProcent}}%)</td>
+    </tr>
+  {{/each}}
+</table>
